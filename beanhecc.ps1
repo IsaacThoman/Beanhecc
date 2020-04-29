@@ -44,3 +44,10 @@ start https://bean.bike/hecc
 }
 
 
+
+function opentxt{
+start hecc.txt
+}
+
+$Button1.Add_Click({ opentxt })
+$Button2.Add_Click({ openweb })
