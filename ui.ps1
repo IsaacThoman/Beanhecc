@@ -65,12 +65,16 @@ function openweb { }
 
 
 
-$turnon.Add_Click({ hecc })
+$turnon.Add_Click({ 
+
+$beanstop = 0
+
+hecc })
 $turnoff.Add_Click({ beanstop })
 
 
 
-$messagelimit = 58
+
 #set the messages to send
 sleep 3
 $textline = 0
@@ -78,11 +82,17 @@ $beanstop = 1
 
 
 function hecc {
+$messagelimitdata = Get-content hecc.txt | Measure-Object –Line
+$messagelimit = $messagelimitdata.Lines
 $textline = $textline + 1
 $message = (gc hecc.txt | select-object -Index $textline) | Out-String
 [System.Windows.Forms.SendKeys]::SendWait($message)
+
 $waitTime = $TextBox1.Text
-sleep $waitTime
+ $timer = New-Object System.Windows.Forms.Timer
+  $timer.Interval = $waitTime
+  $timer.add_tick({})
+
 if($textline -lt $messagelimit) {
 if($beanstop = 0){
 hecc
