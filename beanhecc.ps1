@@ -9,7 +9,8 @@ function hecc {
 $textline = $textline + 1
 $message = (gc hecc.txt | select-object -Index $textline) | Out-String
 [System.Windows.Forms.SendKeys]::SendWait($message)
-sleep 1
+$waitTime = $TextBox1.Text
+sleep $waitTime
 if($textline -lt $messagelimit) {
 if($beanstop = 0){
 hecc
@@ -48,6 +49,7 @@ start https://bean.bike/hecc
 function opentxt{
 start hecc.txt
 }
+
 
 $Button1.Add_Click({ opentxt })
 $Button2.Add_Click({ openweb })
